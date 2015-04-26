@@ -38,7 +38,7 @@ public class WebcamPanel extends JPanel {
 
     public void play() {
         /* Play the video */
-        ourMediaPlayer.getMediaPlayer().playMedia("tcp/h264://5.151.13.237:8002/");
+        ourMediaPlayer.getMediaPlayer().playMedia("Resources/test.3gp");
 
     }
 }

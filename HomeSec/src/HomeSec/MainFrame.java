@@ -94,7 +94,7 @@ public class MainFrame extends JFrame {
     }
 
     private void acceptCams() throws IOException { 
-        //p.play();
+        webcamPanel.play();
     }
 
     private MainFrame getFrame() {
