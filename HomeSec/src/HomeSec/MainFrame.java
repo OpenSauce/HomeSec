@@ -17,6 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -24,6 +25,7 @@ import javax.swing.JPanel;
  */
 public class MainFrame extends JFrame {
     private WebcamPanel webcamPanel;
+    private JTextField statusField;
 
     public MainFrame() {
         super("Security System");
@@ -73,9 +75,13 @@ public class MainFrame extends JFrame {
     private JPanel createComponents() {
         JPanel mainPanel = new JPanel();
         webcamPanel = new WebcamPanel();
+        
+        statusField = new JTextField("Server not started.");
+        statusField.setEditable(false);
+        
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(webcamPanel, BorderLayout.CENTER);
-        
+        mainPanel.add(statusField, BorderLayout.SOUTH);
         return mainPanel;
     }
 
