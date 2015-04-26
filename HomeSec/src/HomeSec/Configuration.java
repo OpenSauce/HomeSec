@@ -20,12 +20,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Lawley
  */
 public class Configuration {
-
     private static Configuration configuration;
-    private static String port;
+    private static String port, address;
 
     public Configuration() {
-        this.port = "5000";
+        this.port = "5018";
+        this.address = "5.151.14.80";
     }
 
     public static String getPort() {
@@ -34,6 +34,14 @@ public class Configuration {
 
     public static void setPort(String port) {
         Configuration.port = port;
+    }
+
+    public static String getAddress() {
+        return address;
+    }
+
+    public static void setAddress(String address) {
+        Configuration.address = address;
     }
 
     public static Configuration getConfiguration() {
