@@ -32,6 +32,9 @@ public class LoginFrame extends JFrame {
 
     public LoginFrame() {
         super("HomeSec");
+        
+        Configuration.startupConfiguration();
+        
         frame = this;
         this.add(createPanel());
         this.pack();
