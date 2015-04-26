@@ -23,6 +23,7 @@ import javax.swing.JPanel;
  * @author Lawley
  */
 public class MainFrame extends JFrame {
+    private WebcamPanel webcamPanel;
 
     public MainFrame() {
         super("Security System");
@@ -70,7 +71,12 @@ public class MainFrame extends JFrame {
     }
 
     private JPanel createComponents() {
-        return new JPanel();
+        JPanel mainPanel = new JPanel();
+        webcamPanel = new WebcamPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(webcamPanel, BorderLayout.CENTER);
+        
+        return mainPanel;
     }
 
     private class ExitItemListener implements ActionListener {
@@ -87,12 +93,7 @@ public class MainFrame extends JFrame {
         }
     }
 
-    private void acceptCams() throws IOException {
-        WebcamPanel p = new WebcamPanel(); 
-        this.add(p, BorderLayout.CENTER);
-
-        this.setVisible(true);
-
+    private void acceptCams() throws IOException { 
         //p.play();
     }
 
