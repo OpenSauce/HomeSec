@@ -13,7 +13,8 @@ import javax.swing.JPanel;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
-public class WebcamPanel extends JPanel {
+public class WebcamPanel extends JPanel implements Runnable {
+    Thread t;
 
     private EmbeddedMediaPlayerComponent ourMediaPlayer;
 
@@ -21,24 +22,35 @@ public class WebcamPanel extends JPanel {
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "C:\\Program Files\\VideoLAN\\VLC");
         ourMediaPlayer = new EmbeddedMediaPlayerComponent();
 
-        /* Set the canvas */
         Canvas c = new Canvas();
         c.setBackground(Color.black);
         c.setVisible(true);
 
-        /* Set the layout */
         this.setLayout(new BorderLayout());
 
-        /* Add the canvas */
         this.add(c, BorderLayout.CENTER);
         this.add(ourMediaPlayer, BorderLayout.CENTER);
         this.setVisible(true);
-
     }
 
     public void play() {
-        /* Play the video */
-        ourMediaPlayer.getMediaPlayer().playMedia("Resources/test.3gp");
-
+        //ourMediaPlayer.getMediaPlayer().playMedia("Resources/test.3gp");
+        ourMediaPlayer.getMediaPlayer().playMedia("tcp/h264://" + Configuration.getAddress() + 
+                ":" + Configuration.getPort() + "/");
     }
+
+    @Override
+    public void run() {
+        play();
+    }
+    
+    public void start ()
+   {
+      System.out.println("Starting webcam thread");
+      if (t == null)
+      {
+         t = new Thread (this);
+         t.start ();
+      }
+   }
 }
