@@ -24,12 +24,13 @@ import javax.swing.JTextField;
  * @author Lawley
  */
 public class MainFrame extends JFrame {
-
+    private MainFrame mainFrame;
     private WebcamPanel webcamPanel;
     private JTextField statusField;
 
     public MainFrame() {
         super("Security System");
+        this.mainFrame = this;
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setJMenuBar(createMenuBar());
         this.setLayout(new BorderLayout());
@@ -37,12 +38,6 @@ public class MainFrame extends JFrame {
         this.setSize(900, 500);
         this.setLocation((int) SecuritySystem.screenWidth / 2 - (this.getWidth() / 2), (int) SecuritySystem.screenHeight / 2 - (this.getHeight() / 2));
         this.setVisible(true);
-
-        try {
-            acceptCams();
-        } catch (IOException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     private JMenuBar createMenuBar() {
@@ -93,20 +88,23 @@ public class MainFrame extends JFrame {
         return mainPanel;
     }
 
-    private void acceptCams() throws IOException {
-        webcamPanel.start();
-        new InputHandler().start();
-    }
-
     private MainFrame getFrame() {
         return this;
+    }
+
+    public WebcamPanel getWebcamPanel() {
+        return webcamPanel;
+    }
+
+    public void setWebcamPanel(WebcamPanel webcamPanel) {
+        this.webcamPanel = webcamPanel;
     }
 
     private class StartServerListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new StartServerFrame();
+            new StartServerFrame(mainFrame);
         }
 
     }
@@ -115,7 +113,7 @@ public class MainFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new StartServerFrame();
+            new StartServerFrame(mainFrame);
         }
 
     }
@@ -124,7 +122,7 @@ public class MainFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new StartServerFrame();
+            new StartServerFrame(mainFrame);
         }
 
     }

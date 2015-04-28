@@ -21,10 +21,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Configuration {
     private static Configuration configuration;
-    private static String port, address;
+    private static String port, JPEGPort, address;
 
     public Configuration() {
         this.port = "5018";
+        this.JPEGPort = "6000";
         this.address = "5.151.14.80";
     }
 
@@ -34,6 +35,14 @@ public class Configuration {
 
     public static void setPort(String port) {
         Configuration.port = port;
+    }
+
+    public static String getJPEGPort() {
+        return JPEGPort;
+    }
+
+    public static void setJPEGPort(String JPEGPort) {
+        Configuration.JPEGPort = JPEGPort;
     }
 
     public static String getAddress() {
