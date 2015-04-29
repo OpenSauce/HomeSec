@@ -14,6 +14,7 @@ import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 public class WebcamPanel extends JPanel implements Runnable {
+
     Thread t;
 
     private EmbeddedMediaPlayerComponent ourMediaPlayer;
@@ -34,23 +35,19 @@ public class WebcamPanel extends JPanel implements Runnable {
     }
 
     public void play() {
-        //ourMediaPlayer.getMediaPlayer().playMedia("Resources/test.3gp");
-        ourMediaPlayer.getMediaPlayer().playMedia("tcp/h264://" + Configuration.getAddress() + 
-                ":" + Configuration.getPort() + "/");
+        ourMediaPlayer.getMediaPlayer().playMedia("Resources/test.3gp");
+        //ourMediaPlayer.getMediaPlayer().playMedia("tcp/h264://" + Configuration.getAddress()
+        //        + ":" + Configuration.getPort() + "/");
     }
 
     @Override
     public void run() {
         play();
     }
-    
-    public void start ()
-   {
-      System.out.println("Starting webcam thread");
-      if (t == null)
-      {
-         t = new Thread (this);
-         t.start ();
-      }
-   }
+
+    public void start() {
+        t = new Thread(this);
+        System.out.println("Starting the webcam thread!");
+        t.start();
+    }
 }
