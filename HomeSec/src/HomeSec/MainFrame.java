@@ -79,7 +79,8 @@ public class MainFrame extends JFrame {
         JPanel mainPanel = new JPanel();
         webcamPanel = new WebcamPanel();
 
-        statusField = new JTextField("Server not currently started.");
+        statusField = new JTextField();
+        setStatusField("Not started.");
         statusField.setEditable(false);
 
         mainPanel.setLayout(new BorderLayout());
@@ -98,6 +99,10 @@ public class MainFrame extends JFrame {
 
     public void setWebcamPanel(WebcamPanel webcamPanel) {
         this.webcamPanel = webcamPanel;
+    }
+    
+    public void setStatusField(String text) {
+        statusField.setText("Status: " + text);
     }
 
     private class StartServerListener implements ActionListener {

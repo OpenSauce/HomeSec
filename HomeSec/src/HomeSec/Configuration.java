@@ -26,7 +26,7 @@ public class Configuration {
     public Configuration() {
         this.port = "5018";
         this.JPEGPort = "6000";
-        this.address = "5.151.14.80";
+        this.address = "5.151.13.97";
     }
 
     public static String getPort() {

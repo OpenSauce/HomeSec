@@ -35,9 +35,9 @@ public class WebcamPanel extends JPanel implements Runnable {
     }
 
     public void play() {
-        ourMediaPlayer.getMediaPlayer().playMedia("Resources/test.3gp");
-        //ourMediaPlayer.getMediaPlayer().playMedia("tcp/h264://" + Configuration.getAddress()
-        //        + ":" + Configuration.getPort() + "/");
+        //ourMediaPlayer.getMediaPlayer().playMedia("Resources/test.3gp");
+        ourMediaPlayer.getMediaPlayer().playMedia("tcp/h264://" + Configuration.getAddress()
+                + ":" + Configuration.getPort() + "/");
     }
 
     @Override

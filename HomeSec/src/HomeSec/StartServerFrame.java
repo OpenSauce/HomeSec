@@ -78,6 +78,7 @@ public class StartServerFrame extends JFrame {
             Configuration.setJPEGPort(JPEGPortField.getText());
             parentWindow.getWebcamPanel().start();
             new InputHandler().start();
+            parentWindow.setStatusField("Started!");
             frame.setVisible(false);
             dispose();
         }
