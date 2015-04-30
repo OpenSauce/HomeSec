@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -19,14 +20,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Lawley
  */
-public class Configuration {
+public class Configuration implements Serializable {
+    private static final long serialVersionUID = 7526472295622776147L;
     private static Configuration configuration;
     private static String port, JPEGPort, address;
 
     public Configuration() {
-        this.port = "5018";
-        this.JPEGPort = "6000";
-        this.address = "5.151.14.80";
+        this.configuration = this;
+        this.port = "2000";
+        this.JPEGPort = "3000";
+        this.address = "5.151.13.97";
     }
 
     public static String getPort() {

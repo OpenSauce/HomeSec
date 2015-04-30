@@ -25,7 +25,7 @@ public class SecuritySystem {
             System.out.println("Error setting native LAF: " + e);
         } 
         
-        new LoginFrame();
+         new LoginFrame();
     }
     
 }

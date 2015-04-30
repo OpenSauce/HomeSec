@@ -35,9 +35,9 @@ public class WebcamPanel extends JPanel implements Runnable {
     }
 
     public void play() {
-        ourMediaPlayer.getMediaPlayer().playMedia("Resources/test.3gp");
-        //ourMediaPlayer.getMediaPlayer().playMedia("tcp/h264://" + Configuration.getAddress()
-        //        + ":" + Configuration.getPort() + "/");
+        //ourMediaPlayer.getMediaPlayer().playMedia("Resources/test.3gp");
+        ourMediaPlayer.getMediaPlayer().playMedia("tcp/h264://" + Configuration.getAddress()
+                + ":" + Configuration.getPort() + "/");
     }
 
     @Override
@@ -47,7 +47,24 @@ public class WebcamPanel extends JPanel implements Runnable {
 
     public void start() {
         t = new Thread(this);
-        System.out.println("Starting the webcam thread!");
         t.start();
     }
+
+    public Thread getT() {
+        return t;
+    }
+
+    public void setT(Thread t) {
+        this.t = t;
+    }
+
+    public EmbeddedMediaPlayerComponent getOurMediaPlayer() {
+        return ourMediaPlayer;
+    }
+
+    public void setOurMediaPlayer(EmbeddedMediaPlayerComponent ourMediaPlayer) {
+        this.ourMediaPlayer = ourMediaPlayer;
+    }
+    
+    
 }
