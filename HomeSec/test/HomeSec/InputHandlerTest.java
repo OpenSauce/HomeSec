@@ -5,6 +5,8 @@
  */
 package HomeSec;
 
+import java.net.ServerSocket;
+import java.net.Socket;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,14 +17,14 @@ import static org.junit.Assert.*;
  * @author Lawley
  */
 public class InputHandlerTest {
-    
+
     public InputHandlerTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
@@ -33,10 +35,9 @@ public class InputHandlerTest {
     @Test
     public void testRun() {
         System.out.println("run");
-        InputHandler instance = new InputHandler();
+        InputHandler instance = new InputHandler(new MainFrame());
         instance.run();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(null, instance.getT());
     }
 
     /**
@@ -45,10 +46,17 @@ public class InputHandlerTest {
     @Test
     public void testStart() {
         System.out.println("start");
-        InputHandler instance = new InputHandler();
+        Configuration.setPort("5000");
+        InputHandler instance = new InputHandler(new MainFrame());
         instance.start();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ServerSocket s = null;
+        try {
+            s = new ServerSocket(Integer.parseInt(Configuration.getJPEGPort()));
+        } catch (Exception e) {
+        }
+
+        //Expect server to already be running
+        assertEquals(null, s);
     }
-    
+
 }

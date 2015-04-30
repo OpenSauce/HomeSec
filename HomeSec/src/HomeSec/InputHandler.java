@@ -16,10 +16,11 @@ import java.net.Socket;
  * @author Lawley
  */
 public class InputHandler implements Runnable {
+    private MainFrame parentWindow;
+    private Thread t;
 
-    Thread t;
-
-    public InputHandler() {
+    public InputHandler(MainFrame parentWindow) {
+        this.parentWindow = parentWindow;
     }
 
     @Override
@@ -39,12 +40,9 @@ public class InputHandler implements Runnable {
 
                 while (true) {
                     fromclient = inFromClient.readLine();
-                    if (fromclient.equals("q") || fromclient.equals("Q")) {
-                        connected.close();
-                        break;
-                    } else {
-                        System.out.println("Recieved data: " + fromclient);
-                    }
+                    if (fromclient.equalsIgnoreCase("HIGH")) {
+                        parentWindow.appendTextArea("Motion detected!");
+                    } 
                 }
             }
         } catch (NumberFormatException | IOException e) {
@@ -56,6 +54,14 @@ public class InputHandler implements Runnable {
         t = new Thread(this);
         System.out.println("Starting the JPEG thread!");
         t.start();
+    }
+
+    public Thread getT() {
+        return t;
+    }
+
+    public void setT(Thread t) {
+        this.t = t;
     }
 
 }

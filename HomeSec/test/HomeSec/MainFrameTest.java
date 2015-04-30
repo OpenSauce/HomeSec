@@ -15,14 +15,14 @@ import static org.junit.Assert.*;
  * @author Lawley
  */
 public class MainFrameTest {
-    
+
     public MainFrameTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
@@ -34,11 +34,10 @@ public class MainFrameTest {
     public void testGetWebcamPanel() {
         System.out.println("getWebcamPanel");
         MainFrame instance = new MainFrame();
-        WebcamPanel expResult = null;
+        WebcamPanel expResult = new WebcamPanel();
+        instance.setWebcamPanel(expResult);
         WebcamPanel result = instance.getWebcamPanel();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -47,11 +46,10 @@ public class MainFrameTest {
     @Test
     public void testSetWebcamPanel() {
         System.out.println("setWebcamPanel");
-        WebcamPanel webcamPanel = null;
+        WebcamPanel webcamPanel = new WebcamPanel();
         MainFrame instance = new MainFrame();
         instance.setWebcamPanel(webcamPanel);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(webcamPanel, instance.getWebcamPanel());
     }
 
     /**
@@ -60,11 +58,10 @@ public class MainFrameTest {
     @Test
     public void testSetStatusField() {
         System.out.println("setStatusField");
-        String text = "";
+        String text = "Test";
         MainFrame instance = new MainFrame();
         instance.setStatusField(text);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("Status: Test", instance.getStatusField());
     }
-    
+
 }

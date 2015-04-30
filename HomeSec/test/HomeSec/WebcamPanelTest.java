@@ -28,30 +28,6 @@ public class WebcamPanelTest {
     }
 
     /**
-     * Test of play method, of class WebcamPanel.
-     */
-    @Test
-    public void testPlay() {
-        System.out.println("play");
-        WebcamPanel instance = new WebcamPanel();
-        instance.play();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of run method, of class WebcamPanel.
-     */
-    @Test
-    public void testRun() {
-        System.out.println("run");
-        WebcamPanel instance = new WebcamPanel();
-        instance.run();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of start method, of class WebcamPanel.
      */
     @Test
@@ -59,8 +35,7 @@ public class WebcamPanelTest {
         System.out.println("start");
         WebcamPanel instance = new WebcamPanel();
         instance.start();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(true, instance.getT().isAlive());
     }
     
 }
