@@ -58,8 +58,8 @@ def send_data(server_socket, jpegPort):
 class main_window(tk.Frame):
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)
-        self.pack()
         self.create_widgets()
+        self.pack()
 
     def create_widgets(self):
         self.grid()
