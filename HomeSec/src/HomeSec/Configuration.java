@@ -21,72 +21,77 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Lawley
  */
 public class Configuration implements Serializable {
-    private static final long serialVersionUID = 7526472295622776147L;
-    private static Configuration configuration;
-    private static String port, JPEGPort, address;
+    private final long serialVersionUID = 7526472295622776147L;
+    protected Configuration configuration;
+    private String port, JPEGPort, address;
 
     public Configuration() {
         this.configuration = this;
-        this.port = "2000";
-        this.JPEGPort = "3000";
-        this.address = "5.151.13.97";
+        this.port = "5000";
+        this.JPEGPort = "6000";
+        this.address = "127.0.0.1";
     }
 
-    public static String getPort() {
+    public String getPort() {
         return port;
     }
 
-    public static void setPort(String port) {
-        Configuration.port = port;
+    public void setPort(String port) {
+        this.port = port;
     }
 
-    public static String getJPEGPort() {
+    public String getJPEGPort() {
         return JPEGPort;
     }
 
-    public static void setJPEGPort(String JPEGPort) {
-        Configuration.JPEGPort = JPEGPort;
+    public void setJPEGPort(String JPEGPort) {
+        this.JPEGPort = JPEGPort;
     }
 
-    public static String getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public static void setAddress(String address) {
-        Configuration.address = address;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public static Configuration getConfiguration() {
+    public Configuration getConfiguration() {
         return configuration;
     }
 
-    public static void setConfiguration(Configuration configuration) {
-        Configuration.configuration = configuration;
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
     }
 
-    public static void startupConfiguration() {
-        File temp = new File("configuration.conf");
+    public Configuration startupConfiguration() {
+        File temp = new File("test.conf");
         if (temp.exists()) {
             configuration = loadConfiguration(temp);
         } else {
             System.out.println("No default database file!");
             configuration = new Configuration();
         }
+        return configuration;
     }
 
-    public static Configuration loadConfiguration(File f) {
+    public Configuration loadConfiguration(File f) {
         Configuration config = null;
         try {
             ObjectInputStream input = new ObjectInputStream(new FileInputStream(f));
             config = (Configuration) input.readObject();
             input.close();
+            port = config.port;
+            JPEGPort = config.JPEGPort;
+            address = config.address;
+            
         } catch (IOException | ClassNotFoundException i) {
             System.out.println("Error reading configuration file!");
         }
         return config;
     }
 
-    public static boolean saveConfiguration(JFrame parentFrame) {
+    public boolean saveConfiguration(JFrame parentFrame) {
         final JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Configuration Files", "conf");
         fc.setFileFilter(filter);
@@ -100,7 +105,7 @@ public class Configuration implements Serializable {
                     file = new File(filePath + ".conf");
                 }
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
-                out.writeObject(configuration);
+                out.writeObject(this);
                 System.out.println("Configuration saved.");
                 return true;
             } catch (Exception e) {

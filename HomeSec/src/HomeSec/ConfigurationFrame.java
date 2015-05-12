@@ -19,15 +19,15 @@ import javax.swing.JTextField;
  *
  * @author Lawley
  */
-public class StartServerFrame extends JFrame {
+public class ConfigurationFrame extends JFrame {
     private MainFrame parentWindow;
-    private StartServerFrame frame;
+    private ConfigurationFrame frame;
     private JLabel portLabel, JPEGPortLabel, ipLabel;
     private JTextField portField, JPEGPortField, ipField;
     private JButton okayButton, cancelButton;
 
-    public StartServerFrame(MainFrame parentWindow) {
-        super("Start Server");
+    public ConfigurationFrame(MainFrame parentWindow) {
+        super("Configuration");
         this.frame = this;
         this.parentWindow = parentWindow;
         this.add(createComponents());
@@ -47,13 +47,19 @@ public class StartServerFrame extends JFrame {
         JPanel centreCentrePanel = new JPanel();
 
         ipLabel = new JLabel("IP: ");
-        ipField = new JTextField(Configuration.getAddress());
+        ipField = new JTextField(10);
         portLabel = new JLabel("Port: ");
-        portField = new JTextField(Configuration.getPort());
+        portField = new JTextField(5);
         JPEGPortLabel = new JLabel("Second Port: ");
-        JPEGPortField = new JTextField(Configuration.getJPEGPort());
-        okayButton = new JButton("Okay");
+        JPEGPortField = new JTextField(5);
+        okayButton = new JButton("Save");
         cancelButton = new JButton("Cancel");
+        
+        if(parentWindow.getConfig() != null) { 
+            ipField.setText(parentWindow.getConfig().getAddress());
+            portField.setText(parentWindow.getConfig().getPort());
+            JPEGPortField.setText(parentWindow.getConfig().getJPEGPort());
+        }
 
         centreNorthPanel.add(ipLabel);
         centreNorthPanel.add(ipField);
@@ -80,12 +86,10 @@ public class StartServerFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Configuration.setPort(portField.getText());
-            Configuration.setJPEGPort(JPEGPortField.getText());
-            Configuration.setAddress(ipField.getText());
-            parentWindow.getWebcamPanel().start();
-            new InputHandler(parentWindow).start();
-            parentWindow.setStatusField("Started!");
+            parentWindow.getConfig().setPort(portField.getText());
+            parentWindow.getConfig().setJPEGPort(JPEGPortField.getText());
+            parentWindow.getConfig().setAddress(ipField.getText());
+            parentWindow.getConfig().saveConfiguration(frame);
             frame.setVisible(false);
             dispose();
         }

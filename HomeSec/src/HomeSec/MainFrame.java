@@ -32,10 +32,12 @@ public class MainFrame extends JFrame {
     private WebcamPanel webcamPanel;
     private JTextField statusField;
     private JTextArea textArea;
+    private Configuration config;
 
-    public MainFrame() {
+    public MainFrame(Configuration config) {
         super("Security System");
         this.mainFrame = this;
+        this.config = config;
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setJMenuBar(createMenuBar());
         this.setLayout(new BorderLayout());
@@ -57,7 +59,7 @@ public class MainFrame extends JFrame {
         JMenuItem exitItem = new JMenuItem("Exit");
         exitItem.addActionListener(new ExitItemListener());
 
-        JMenuItem saveConfigItem = new JMenuItem("Save Configuration");
+        JMenuItem saveConfigItem = new JMenuItem("Configuration Settings");
         saveConfigItem.addActionListener(new SaveConfigListener());
         JMenuItem loadConfigItem = new JMenuItem("Load Configuration");
         loadConfigItem.addActionListener(new LoadConfigListener());
@@ -88,7 +90,7 @@ public class MainFrame extends JFrame {
     private JPanel createComponents() {
         JPanel mainPanel = new JPanel();
         JPanel southPanel = new JPanel();
-        webcamPanel = new WebcamPanel();
+        webcamPanel = new WebcamPanel(this);
 
         statusField = new JTextField();
         setStatusField("Not started.");
@@ -129,6 +131,14 @@ public class MainFrame extends JFrame {
     void appendTextArea(String text) {
         textArea.append(text + "\n");
     }
+
+    public Configuration getConfig() {
+        return config;
+    }
+
+    public void setConfig(Configuration config) {
+        this.config = config;
+    }
     
     private class AboutListener implements ActionListener {
 
@@ -143,7 +153,9 @@ public class MainFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new StartServerFrame(mainFrame);
+            mainFrame.getWebcamPanel().start();
+            new InputHandler(mainFrame).start();
+            mainFrame.setStatusField("Started!");
         }
 
     }
@@ -152,7 +164,7 @@ public class MainFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Configuration.saveConfiguration(mainFrame);
+            new ConfigurationFrame(mainFrame);
         }
 
     }
@@ -167,7 +179,7 @@ public class MainFrame extends JFrame {
             fc.setCurrentDirectory(new java.io.File("."));
             int returnVal = fc.showOpenDialog(MainFrame.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                Configuration.loadConfiguration(fc.getSelectedFile());
+                config.loadConfiguration(fc.getSelectedFile());
             }
         }
 

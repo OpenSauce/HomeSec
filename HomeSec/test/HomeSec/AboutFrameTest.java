@@ -33,7 +33,7 @@ public class AboutFrameTest {
     @Test
     public void testGetParentFrame() {
         System.out.println("getParentFrame");
-        MainFrame expResult = new MainFrame();
+        MainFrame expResult = new MainFrame(new Configuration());
         AboutFrame instance = new AboutFrame(expResult);
         instance.setParentFrame(expResult);
         assertEquals(expResult, instance.getParentFrame());
@@ -45,7 +45,7 @@ public class AboutFrameTest {
     @Test
     public void testSetParentFrame() {
         System.out.println("setParentFrame");
-        MainFrame parentFrame = new MainFrame();
+        MainFrame parentFrame = new MainFrame(new Configuration());
         AboutFrame instance = new AboutFrame(parentFrame);
         instance.setParentFrame(parentFrame);
         assertEquals(parentFrame, instance.getParentFrame());

@@ -29,8 +29,8 @@ public class InputHandler implements Runnable {
 
         try {
 
-            ServerSocket Server = new ServerSocket(Integer.parseInt(Configuration.getJPEGPort()));
-            System.out.println("Server currently waiting for client on port: " + Configuration.getJPEGPort());
+            ServerSocket Server = new ServerSocket(Integer.parseInt(parentWindow.getConfig().getJPEGPort()));
+            System.out.println("Server currently waiting for client on port: " + parentWindow.getConfig().getJPEGPort());
 
             while (true) {
                 Socket connected = Server.accept();

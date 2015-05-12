@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
  *
  * @author Lawley
  */
-public class StartServerFrameTest {
+public class ConfigurationFrameTest {
     
-    public StartServerFrameTest() {
+    public ConfigurationFrameTest() {
     }
     
     @BeforeClass
@@ -29,12 +29,12 @@ public class StartServerFrameTest {
     }
 
     /**
-     * Test of createComponents method, of class StartServerFrame.
+     * Test of createComponents method, of class ConfigurationFrame.
      */
     @Test
     public void testCreateComponents() {
         System.out.println("createComponents");
-        StartServerFrame instance = null;
+        ConfigurationFrame instance = null;
         JPanel expResult = null;
         JPanel result = instance.createComponents();
         assertEquals(expResult, result);

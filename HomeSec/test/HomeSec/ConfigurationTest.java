@@ -35,8 +35,9 @@ public class ConfigurationTest {
     @Test
     public void testGetPort() {
         System.out.println("getPort");
-        Configuration.setPort("");
-        String result = Configuration.getPort();
+        Configuration config = new Configuration();
+        config.setPort("");
+        String result = config.getPort();
         assertEquals("", result);
     }
 
@@ -47,8 +48,9 @@ public class ConfigurationTest {
     public void testSetPort() {
         System.out.println("setPort");
         String port = "";
-        Configuration.setPort(port);
-        assertEquals("", Configuration.getPort());
+        Configuration config = new Configuration();
+        config.setPort(port);
+        assertEquals("", config.getPort());
     }
 
     /**
@@ -57,8 +59,9 @@ public class ConfigurationTest {
     @Test
     public void testGetJPEGPort() {
         System.out.println("getJPEGPort");
-        Configuration.setJPEGPort("");
-        String result = Configuration.getJPEGPort();
+        Configuration config = new Configuration();
+        config.setJPEGPort("");
+        String result = config.getJPEGPort();
         assertEquals("", result);
     }
 
@@ -69,8 +72,9 @@ public class ConfigurationTest {
     public void testSetJPEGPort() {
         System.out.println("setJPEGPort");
         String JPEGPort = "";
-        Configuration.setJPEGPort(JPEGPort);
-        assertEquals("", Configuration.getJPEGPort());
+        Configuration config = new Configuration();
+        config.setJPEGPort(JPEGPort);
+        assertEquals("", config.getJPEGPort());
     }
 
     /**
@@ -79,8 +83,9 @@ public class ConfigurationTest {
     @Test
     public void testGetAddress() {
         System.out.println("getAddress");
-        Configuration.setAddress("");
-        String result = Configuration.getAddress();
+        Configuration config = new Configuration();
+        config.setAddress("");
+        String result = config.getAddress();
         assertEquals("", result);
     }
 
@@ -91,43 +96,9 @@ public class ConfigurationTest {
     public void testSetAddress() {
         System.out.println("setAddress");
         String address = "";
-        Configuration.setAddress(address);
-        assertEquals("", Configuration.getAddress());
-    }
-
-    /**
-     * Test of getConfiguration method, of class Configuration.
-     */
-    @Test
-    public void testGetConfiguration() {
-        System.out.println("getConfiguration");
-        Configuration expResult = null;
-        Configuration result = Configuration.getConfiguration();
-        assertEquals(expResult, result);
-        expResult = new Configuration();
-        Configuration.setConfiguration(expResult);
-        assertEquals(expResult, Configuration.getConfiguration());
-    }
-
-    /**
-     * Test of setConfiguration method, of class Configuration.
-     */
-    @Test
-    public void testSetConfiguration() {
-        System.out.println("setConfiguration");
-        Configuration configuration = null;
-        Configuration.setConfiguration(configuration);
-        assertEquals(null, Configuration.getConfiguration());
-    }
-
-    /**
-     * Test of startupConfiguration method, of class Configuration.
-     */
-    @Test
-    public void testStartupConfiguration() {
-        System.out.println("startupConfiguration");
-        Configuration.startupConfiguration();
-        assertEquals(true, true);
+        Configuration config = new Configuration();
+        config.setAddress(address);
+        assertEquals("", config.getAddress());
     }
 
     /**

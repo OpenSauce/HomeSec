@@ -29,11 +29,12 @@ public class LoginFrame extends JFrame {
     JButton okayButton, cancelButton, disabledUserButton;
     JLabel usernameLabel, passwordLabel;
     JPanel southPanel, centrePanel, usernamePanel, passwordPanel, mainPanel;
+    Configuration config;
 
     public LoginFrame() {
         super("HomeSec");
         
-        Configuration.startupConfiguration();
+        config = new Configuration().startupConfiguration();
         
         frame = this;
         this.add(createPanel());
@@ -103,7 +104,7 @@ public class LoginFrame extends JFrame {
 
         public void actionPerformed(ActionEvent e) {
             if (usernameField.getText().equalsIgnoreCase("admin")) {
-                new MainFrame();
+                new MainFrame(config);
                 frame.setVisible(false);
                 dispose();
             }
@@ -128,7 +129,7 @@ public class LoginFrame extends JFrame {
             if (e.getKeyChar() == KeyEvent.VK_ENTER) {
 
                 if (usernameField.getText().equalsIgnoreCase("admin")) {
-                    new MainFrame();
+                    new MainFrame(config);
                     frame.setVisible(false);
                     dispose();
                 }
