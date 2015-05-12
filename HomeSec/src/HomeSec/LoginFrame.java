@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,11 +31,13 @@ public class LoginFrame extends JFrame {
     JLabel usernameLabel, passwordLabel;
     JPanel southPanel, centrePanel, usernamePanel, passwordPanel, mainPanel;
     Configuration config;
+    DatabaseHandler database;
 
     public LoginFrame() {
         super("HomeSec");
         
         config = new Configuration().startupConfiguration();
+        database = new DatabaseHandler(new File("Database.db"));
         
         frame = this;
         this.add(createPanel());
