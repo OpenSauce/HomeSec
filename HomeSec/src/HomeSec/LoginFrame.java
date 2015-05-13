@@ -106,7 +106,7 @@ public class LoginFrame extends JFrame {
     private class LoginListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            if (usernameField.getText().equalsIgnoreCase("admin")) {
+            if (database.validateUser(usernameField.getText(), passwordField.getText())) {
                 new MainFrame(config);
                 frame.setVisible(false);
                 dispose();
@@ -131,11 +131,11 @@ public class LoginFrame extends JFrame {
 
             if (e.getKeyChar() == KeyEvent.VK_ENTER) {
 
-                if (usernameField.getText().equalsIgnoreCase("admin")) {
-                    new MainFrame(config);
-                    frame.setVisible(false);
-                    dispose();
-                }
+                if (database.validateUser(usernameField.getText(), passwordField.getText())) {
+                new MainFrame(config);
+                frame.setVisible(false);
+                dispose();
+            }
             }
         }
 
