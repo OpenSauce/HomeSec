@@ -18,27 +18,29 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
  *
  * @author Lawley
  */
 public class LoginFrame extends JFrame {
+
     LoginFrame frame;
     JTextField usernameField;
     JPasswordField passwordField;
     JButton okayButton, cancelButton, disabledUserButton;
-    JLabel usernameLabel, passwordLabel;
-    JPanel southPanel, centrePanel, usernamePanel, passwordPanel, mainPanel;
+    JLabel usernameLabel, passwordLabel, statusLabel;
+    JPanel southPanel, centrePanel, usernamePanel, passwordPanel, mainPanel, southNorthPanel, southSouthPanel;
     Configuration config;
     DatabaseHandler database;
 
     public LoginFrame() {
         super("HomeSec");
-        
+
         config = new Configuration().startupConfiguration();
         database = new DatabaseHandler(new File("Database.db"));
-        
+
         frame = this;
         this.add(createPanel());
         this.pack();
@@ -49,7 +51,7 @@ public class LoginFrame extends JFrame {
 
     private JPanel createPanel() {
         frame = this;
-        
+
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         usernameField = new JTextField(20);
@@ -58,14 +60,15 @@ public class LoginFrame extends JFrame {
         passwordLabel = new JLabel("Password:");
         okayButton = new JButton("Login");
         cancelButton = new JButton("Cancel");
+        statusLabel = new JLabel("Please enter your details above.", SwingConstants.CENTER);
         southPanel = new JPanel();
         centrePanel = new JPanel();
         mainPanel = new JPanel();
-
-        ImageIcon magnifierIcon = new ImageIcon("resources/images/login_images/Magnifier.PNG");
+        southNorthPanel = new JPanel();
 
         mainPanel.setLayout(new BorderLayout());
         centrePanel.setLayout(new BorderLayout());
+        southPanel.setLayout(new BorderLayout());
         usernamePanel = new JPanel();
         passwordPanel = new JPanel();
 
@@ -78,14 +81,15 @@ public class LoginFrame extends JFrame {
         ImageIcon imageIcon = new ImageIcon("resources/images/login_images/Software_Logo.PNG");
         JLabel imageLabel = new JLabel(imageIcon);
 
-
         centrePanel.add(imageLabel, BorderLayout.NORTH);
         centrePanel.add(usernamePanel, BorderLayout.CENTER);
         centrePanel.add(passwordPanel, BorderLayout.SOUTH);
 
+        southNorthPanel.add(okayButton);
+        southNorthPanel.add(cancelButton);
 
-        southPanel.add(okayButton);
-        southPanel.add(cancelButton);
+        southPanel.add(southNorthPanel, BorderLayout.NORTH);
+        southPanel.add(statusLabel, BorderLayout.SOUTH);
 
         mainPanel.add(centrePanel, BorderLayout.CENTER);
         mainPanel.add(southPanel, BorderLayout.SOUTH);
@@ -103,6 +107,10 @@ public class LoginFrame extends JFrame {
         return mainPanel;
     }
 
+    public void setStatusLabel(String text) {
+        statusLabel.setText(text);
+    }
+
     private class LoginListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -110,11 +118,13 @@ public class LoginFrame extends JFrame {
                 new MainFrame(config);
                 frame.setVisible(false);
                 dispose();
+            } else {
+                frame.setStatusLabel("Incorrect login details!");
             }
         }
     }
-    
-        private class CancelListener implements ActionListener {
+
+    private class CancelListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -132,10 +142,12 @@ public class LoginFrame extends JFrame {
             if (e.getKeyChar() == KeyEvent.VK_ENTER) {
 
                 if (database.validateUser(usernameField.getText(), passwordField.getText())) {
-                new MainFrame(config);
-                frame.setVisible(false);
-                dispose();
-            }
+                    new MainFrame(config);
+                    frame.setVisible(false);
+                    dispose();
+                } else {
+                    frame.setStatusLabel("Incorrect login details!");
+                }
             }
         }
 

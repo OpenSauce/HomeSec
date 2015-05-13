@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -30,7 +31,7 @@ public class AboutFrame extends JFrame {
     private JPanel createComponents() {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        JLabel homesecLabel = new JLabel("HomeSec");
+        JLabel homesecLabel = new JLabel("HomeSec", SwingConstants.CENTER);
         mainPanel.add(homesecLabel, BorderLayout.NORTH);
         JLabel aboutLabel = new JLabel("Developed by Leigh Lawley - L021599A");
         mainPanel.add(aboutLabel, BorderLayout.SOUTH);

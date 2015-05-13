@@ -45,11 +45,9 @@ public class DatabaseHandler {
 
             if (rs.next()) {
                 if (getPasswordHash(password).contentEquals(rs.getString("password"))) {
-                    System.out.println("Hello");
                     return true;
                 }
             } else {
-                System.out.println("No");
                 return false;
             }
         } catch (SQLException e) {

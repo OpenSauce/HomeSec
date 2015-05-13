@@ -51,10 +51,10 @@ public class MainFrame extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         JMenu editMenu = new JMenu("Edit");
-        JMenu webcamMenu = new JMenu("Webcam");
         JMenu helpMenu = new JMenu("Help");
 
         JMenuItem startServerItem = new JMenuItem("Start Server");
+        JMenuItem stopServerItem = new JMenuItem("Stop Server");
         startServerItem.addActionListener(new StartServerListener());
         JMenuItem exitItem = new JMenuItem("Exit");
         exitItem.addActionListener(new ExitItemListener());
@@ -64,25 +64,21 @@ public class MainFrame extends JFrame {
         JMenuItem loadConfigItem = new JMenuItem("Load Configuration");
         loadConfigItem.addActionListener(new LoadConfigListener());
 
-        JMenuItem settingsItem = new JMenuItem("Settings");
-
         JMenuItem aboutMenuItem = new JMenuItem("About");
         aboutMenuItem.addActionListener(new AboutListener());
 
         fileMenu.add(startServerItem);
+        fileMenu.add(stopServerItem);
         fileMenu.addSeparator();
         fileMenu.add(exitItem);
 
         editMenu.add(saveConfigItem);
         editMenu.add(loadConfigItem);
 
-        webcamMenu.add(settingsItem);
-
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
-        menuBar.add(webcamMenu);
         menuBar.add(helpMenu);
         return menuBar;
     }
@@ -155,7 +151,7 @@ public class MainFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             mainFrame.getWebcamPanel().start();
             new InputHandler(mainFrame).start();
-            mainFrame.setStatusField("Started!");
+            mainFrame.setStatusField("Starting threads...");
         }
 
     }
