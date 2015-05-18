@@ -67,24 +67,26 @@ class main_window(tk.Frame):
         self.port = tk.StringVar()
         self.jpegPort = tk.StringVar()
 
+        self.hostnameLabel = tk.Label(self, text="Your IP: " + socket.gethostbyname(socket.gethostname()))
+        self.hostnameLabel.grid(column=0, row=0, columnspan=2)
 
         self.ipLabel = tk.Label(self,anchor="w", text="Stream Port:")
-        self.ipLabel.grid(column=0, row=0)
+        self.ipLabel.grid(column=0, row=1)
 
         self.portEntry = tk.Entry(self, textvariable=self.port)
-        self.portEntry.grid(column=1,row=0,sticky='EW')
+        self.portEntry.grid(column=1,row=1,sticky='EW')
 
         self.portLabel = tk.Label(self,anchor="w", text="JPEG Port:")
-        self.portLabel.grid(column=0, row=1)
+        self.portLabel.grid(column=0, row=2)
 
         self.jpegEntry = tk.Entry(self, textvariable=self.jpegPort)
-        self.jpegEntry.grid(column=1,row=1)
+        self.jpegEntry.grid(column=1,row=2)
 
         self.connectButton = tk.Button(self, text="Start", command=self.connect)
-        self.connectButton.grid(column=0, row=2)
+        self.connectButton.grid(column=0, row=3)
 
         self.exitButton = tk.Button(self, text="Quit", command=self.close)
-        self.exitButton.grid(column=1, row=2)
+        self.exitButton.grid(column=1, row=3)
 
     def connect(self):
         try:
