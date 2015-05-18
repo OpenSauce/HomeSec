@@ -20,6 +20,7 @@ import javax.swing.JTextField;
  * @author Lawley
  */
 public class ConfigurationFrame extends JFrame {
+
     private MainFrame parentWindow;
     private ConfigurationFrame frame;
     private JLabel portLabel, JPEGPortLabel, ipLabel;
@@ -54,8 +55,8 @@ public class ConfigurationFrame extends JFrame {
         JPEGPortField = new JTextField(5);
         okayButton = new JButton("Save");
         cancelButton = new JButton("Cancel");
-        
-        if(parentWindow.getConfig() != null) { 
+
+        if (parentWindow.getConfig() != null) {
             ipField.setText(parentWindow.getConfig().getAddress());
             portField.setText(parentWindow.getConfig().getPort());
             JPEGPortField.setText(parentWindow.getConfig().getJPEGPort());
