@@ -51,6 +51,7 @@ public class MainFrame extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         JMenu editMenu = new JMenu("Edit");
+        JMenu logMenu = new JMenu("Log");
         JMenu helpMenu = new JMenu("Help");
 
         JMenuItem startServerItem = new JMenuItem("Start Server");
@@ -58,6 +59,9 @@ public class MainFrame extends JFrame {
         startServerItem.addActionListener(new StartServerListener());
         JMenuItem exitItem = new JMenuItem("Exit");
         exitItem.addActionListener(new ExitItemListener());
+        
+        JMenuItem openLogItem = new JMenuItem("Open Log");
+        openLogItem.addActionListener(new OpenLogListener());
 
         JMenuItem saveConfigItem = new JMenuItem("Configuration Settings");
         saveConfigItem.addActionListener(new SaveConfigListener());
@@ -74,11 +78,14 @@ public class MainFrame extends JFrame {
 
         editMenu.add(saveConfigItem);
         editMenu.add(loadConfigItem);
+        
+        logMenu.add(openLogItem);
 
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
+        menuBar.add(logMenu);
         menuBar.add(helpMenu);
         return menuBar;
     }
@@ -161,6 +168,20 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             new ConfigurationFrame(mainFrame);
+        }
+
+    }
+    
+   private class OpenLogListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                File f = new File("captures/");
+                Runtime.getRuntime().exec("explorer.exe /select, " + f.getPath());
+                        } catch (IOException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
