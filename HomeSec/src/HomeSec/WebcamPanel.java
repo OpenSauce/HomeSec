@@ -11,6 +11,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import javax.swing.JPanel;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
+import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 public class WebcamPanel extends JPanel implements Runnable {
@@ -57,6 +58,10 @@ public class WebcamPanel extends JPanel implements Runnable {
 
     public void setT(Thread t) {
         this.t = t;
+    }
+    
+    public MediaPlayer getMediaPlayer() {
+        return ourMediaPlayer.getMediaPlayer();
     }
 
     public EmbeddedMediaPlayerComponent getOurMediaPlayer() {

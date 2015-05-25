@@ -5,17 +5,24 @@
  */
 package HomeSec;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import javax.imageio.ImageIO;
 
 /**
  *
  * @author Lawley
  */
 public class InputHandler implements Runnable {
+
     private MainFrame parentWindow;
     private Thread t;
 
@@ -38,13 +45,30 @@ public class InputHandler implements Runnable {
 
                 BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connected.getInputStream()));
 
+                int count = 0;
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+                File f = new File("captures");
+                f.mkdir();
                 while (true) {
                     fromclient = inFromClient.readLine();
                     if (fromclient.equalsIgnoreCase("HIGH")) {
-                        parentWindow.appendTextArea("Motion detected!");
-                    } 
+                        Calendar cal = Calendar.getInstance();
+                        BufferedImage img1 = parentWindow.getWebcamPanel().getMediaPlayer().getSnapshot();
+                        String filename = "captures//" + dateFormat.format(cal.getTime()) + ".jpg";
+                        File f1 = new File(filename);
+                        parentWindow.setStatusField("File saved: " + filename);
+                        count++;
+                        try {
+                            ImageIO.write(img1, "png", f1);
+                        } catch (IOException ex) {
+                            System.out.println(ex);
+                        }
+                        // else
+                        //System.out.println("blank image");
+                    }
                 }
             }
+
         } catch (NumberFormatException | IOException e) {
             System.out.println("Server error!");
         }
